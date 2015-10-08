@@ -49,7 +49,8 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 func paymentHandler(w http.ResponseWriter, r *http.Request) {
   log.Println("ipn received")
-  s := r.URL.Query()
+  r.ParseForm()
+  s := r.PostForm
   log.Println(s)
   log.Println(s.Get("invoiceEmail"))
   log.Println(s.Get("invoiceFirstName"))
