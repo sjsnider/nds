@@ -48,8 +48,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func paymentHandler(w http.ResponseWriter, r *http.Request) {
-  w.Write([]byte("Hello"))
   log.Println("ipn received")
+  s := r.URL.Query()
+  log.Println(s)
+  log.Println(s.Get("invoiceEmail"))
+  log.Println(s.Get("invoiceFirstName"))
+  log.Println(s.Get("invoiceLastName"))
 }
 
 func main() {
