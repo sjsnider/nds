@@ -54,6 +54,7 @@ func paymentHandler(w http.ResponseWriter, r *http.Request) {
   log.Println(s.Get("invoiceEmail"))
   log.Println(s.Get("invoiceFirstName"))
   log.Println(s.Get("invoiceLastName"))
+  w.WriteHeader(http.StatusOK)
 }
 
 func main() {
