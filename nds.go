@@ -49,6 +49,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 func paymentHandler(w http.ResponseWriter, r *http.Request) {
   w.Write([]byte("Hello"))
+  log.Println("ipn received")
 }
 
 func main() {
