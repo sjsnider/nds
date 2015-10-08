@@ -25,12 +25,10 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     log.Println(err)
   }
+
   log.Println(loginRequest.Username)
   url := "https://api-staging.vantagesports.com/users/v1/login"
-  // var jsonStr = []byte(`{"u": "t-adam@vantagesports.com", "p": "t-adam", "t": true}`)
-  // var request io.Reader = loginRequest
   b, err := json.Marshal(loginRequest)
-  // req, err := http.NewRequest("POST", url, b)
   req, err := http.NewRequest("POST", url, bytes.NewBuffer(b))
   req.Header.Set("Content-Type", "application/json")
 
@@ -39,20 +37,23 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     panic(err)
   }
-  defer resp.Body.Close()
 
+  defer resp.Body.Close()
   log.Println("response Status:", resp.Status)
   log.Println("response Headers:", resp.Header)
   body, _ := ioutil.ReadAll(resp.Body)
   log.Println(body)
   log.Println("response Body:", string(body))
-
   w.Write(body)
-  // json.NewEncoder(w).Encode(string(body))
+}
+
+func paymentHandler(w http.ResponseWriter, r *http.Request) {
+  w.Write([]byte("Hello"))
 }
 
 func main() {
   http.HandleFunc("/login/", loginHandler)
+  http.HandleFunc("/payment/", paymentHandler)
 
   http.ListenAndServe(":8080", nil);
 }
